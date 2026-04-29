@@ -2,7 +2,7 @@
 
 En lokal React + TypeScript-app byggd med Vite. Appen är ett utbildningslabb för att förstå simulering, state management, strategi-logik, eventflöden, risk, Martingale och statistik.
 
-Appen använder bara virtuella pengar och lokal data i webbläsaren. Den kopplar inte upp sig mot Svenska Spel eller något annat casino, loggar inte in, scrapar inte externa webbsidor, använder inte OCR och klickar inte på riktiga sajter.
+Applikationen är ett lokalt simuleringsverktyg som använder virtuella pengar och webbläsarbaserad lagring. Den har ingen integration med externa speltjänster eller andra livekällor.
 
 ## Installera
 
@@ -20,6 +20,80 @@ npm run dev
 
 ```text
 http://localhost:5173
+```
+
+## Kör med Docker
+
+Appen kan också köras i Docker som en produktionsbyggd Vite-app. Då byggs frontend-koden först med `npm run build`, och de färdiga filerna i `dist/` serveras sedan från containern.
+
+### Bygg Docker-imagen
+
+```bash
+docker build -t betting-strategy-simulator .
+```
+
+### Starta containern
+
+```bash
+docker run --name betting-strategy-simulator -p 8080:80 betting-strategy-simulator
+```
+
+Öppna sedan:
+
+```text
+http://localhost:8080
+```
+
+### Stoppa containern
+
+```bash
+docker stop betting-strategy-simulator
+```
+
+### Starta igen
+
+```bash
+docker start betting-strategy-simulator
+```
+
+### Ta bort containern
+
+```bash
+docker rm -f betting-strategy-simulator
+```
+
+## Kör med Docker Compose
+
+Projektet innehåller en `docker-compose.yml` kan appen startas enklare med Docker Compose.
+
+### Starta appen
+
+```bash
+docker compose up --build
+```
+
+Kör i bakgrunden:
+
+```bash
+docker compose up --build -d
+```
+
+Öppna sedan:
+
+```text
+http://localhost:8080
+```
+
+### Stoppa appen
+
+```bash
+docker compose down
+```
+
+### Se loggar
+
+```bash
+docker compose logs -f
 ```
 
 ## Testa logiken
